@@ -1,0 +1,103 @@
+{
+  "data": [{
+    "id": "1111111",
+    "swflbm": "1111111",
+    "isClicked":false,
+    "label": "企业所得税策划",
+    "swflmc": "企业所得税策划",
+    "labelIcon": "/static/img/folder.png",
+    "isCategory":true,
+    "children": [
+      {
+        "id": "11",
+        "swflbm": "11",
+        "isClicked":false,
+        "isCategory":false,
+        "label": "小规模纳税人策划",
+        "labelIcon": "/static/img/file.png",
+        "data":[{
+          "title": "基础信息",
+          "name": "basicInfo",
+          "basicInfo":{
+            "jdfl": "小规模纳税人策划",
+            "jdbt": "亏损弥补、技术开发费加计扣除、公益救济性捐赠等都是应当从企业所得税应纳税所得额中扣 除的项目。目前，税法对扣除顺序未作明确规定，兼有多项税前扣除项目的企业纳税人可以自由安排扣除 项目的顺序，选择税负最低的扣除方案"
+          }
+        }, {
+          "title": "策划方案1",
+          "name": "1",
+          "planScheme":[
+            {
+              "title": "业务逻辑",
+              "name": "businessLogic",
+              "content":{
+                "msg": "业务逻辑"
+              }
+            },
+            {
+              "title": "计算逻辑",
+              "name": "calculateLogic",
+              "content":{
+                "msg": "计算逻辑"
+              }
+            }
+          ]
+        },{
+          "title": "策划方案2",
+          "name": "2",
+          "planScheme":[
+            {
+              "title": "业务逻辑",
+              "name": "businessLogic",
+              "content":{
+                "msg": "业务逻辑2"
+              }
+            },
+            {
+              "title": "计算逻辑",
+              "name": "calculateLogic",
+              "content":{
+                "msg": "计算逻辑2"
+              }
+            }
+          ]
+        }]
+      },
+      {
+        "id": "22",
+        "swflbm": "22",
+        "isClicked":false,
+        "isCategory":false,
+        "label": "企业出口货物退税筹划",
+        "labelIcon": "/static/img/file.png",
+        "data":[{
+          "title": "基础信息",
+          "name": "basicInfo",
+          "basicInfo":{
+            "jdfl": "企业出口货物退税筹划",
+            "jdbt": "亏损弥补、技术开发费加计扣除、公益救济性捐赠等都是应当从企业所得税应纳税所得额中扣 除的项目。目前，税法对扣除顺序未作明确规定，兼有多项税前扣除项目的企业纳税人可以自由安排扣除 项目的顺序，选择税负最低的扣除方案"
+          }
+        }, {
+          "title": "策划方案1",
+          "name": "1",
+          "planScheme":[
+            {
+              "title": "业务逻辑",
+              "name": "businessLogic",
+              "content":{
+                "msg": "业务逻辑"
+              }
+            },
+            {
+              "title": "计算逻辑",
+              "name": "calculateLogic",
+              "content":{
+                "msg": "计算逻辑"
+              }
+            }
+          ]
+        }]
+      }
+    ]
+  }
+  ]
+}

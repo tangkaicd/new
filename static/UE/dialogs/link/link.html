@@ -1,0 +1,239 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <script type="text/javascript" src="../internal.js"></script>
+    <link href="../../../common/index.css" rel="stylesheet">
+    <style type="text/css">
+        *{margin:0;padding:0;color: #838383;}
+        .mainPage{
+            padding:15px;
+        }
+        .searchWapper{
+            margin-bottom: 10px;
+        }
+        .searchWapper input{
+            width: 200px;
+        }
+        .tableWrapper{
+            height: 370px;
+        }
+        table tr{
+            cursor:pointer;
+        }
+       table tr:hover{
+            background: #F5F7FA;
+        }
+        table .checked_tr{
+            background: #ECF5FF;
+        }
+    </style>
+</head>
+<body>
+    <div id="tooltip"> </div>
+    <div id="tipModel">
+        <div class="dialog">
+            <div class="header">
+                '提示框'
+            </div>
+            <div class="body">
+            </div>
+            <div class="footer">
+                <button class="confirm-btn">确定</button>
+                <button class="cancel-btn">取消</button>
+            </div>
+        </div>
+    </div>
+    <div id="tipModel_top">
+        <div class="dialog">
+            <div class="header">
+                '提示框'
+            </div>
+            <div class="body">
+            </div>
+            <div class="footer">
+                <button class="confirm-btn">确定</button>
+                <button class="cancel-btn">取消</button>
+            </div>
+        </div>
+    </div>
+    <div class="mainPage">
+        <div class="searchWapper">
+            <input class="searchInput queryLikeVal" type="text" placeholder="请输入关键字查询">
+            <span class="search"></span>
+        </div>
+
+        <div class="tableWrapper">
+            <table>
+
+
+            </table>
+        </div>
+
+        <div class="footer-searchList">
+            <span>共<span class="total"></span>条纪录</span>
+            <span class="dropdown-wrapper" style="margin:0 10px">
+            每页<span class="pageSize"></span>条
+            <div class="dropdown none">
+
+            </div>
+        </span>
+            第<input class="pageIndex" type="text"/>/<span class="totalPage"></span>页
+            <span class="firstPage" >首页</span>
+            <span class="prePage" >上一页</span>
+            <span class="nextPage" >下一页</span>
+            <span class="lastPage" >末页</span>
+        </div>
+    </div>
+<script src="../../../lib/jquery.min.js"></script>
+<script src="../../../common/index.js"></script>
+<script type="text/javascript">
+//    var ctx="http://localhost:9093";
+    var ctx=location.protocol+'//' +location.host;
+    var $mainPage=$(".mainPage");
+    updateTable(global.pageIndex,global.pageSize);
+    var $searchParamList=[
+//				{
+//					key:"dropdown",
+//					value:$mainPage.find(".searchWapper .dropdownWrapper_certType > input")
+//				},
+        {
+            key:"input",
+            value:$mainPage.find(".searchWapper .queryLikeVal")
+        }
+    ];
+
+    global.updateTable_event($mainPage,$searchParamList,updateTable);
+
+    function updateTable(pageIndex,pageSize,paramList){
+        var param={
+            pageIndex:pageIndex,
+            pageSize:pageSize,
+            queryLikeVal:paramList?paramList[0]:"",
+        }
+        global.makeWaiting();
+        $.ajax({
+            type : 'post',
+            url : ctx+'/policyDetail/queryPageList.do',
+            data : param,
+            success : function(result){
+                global.removeWaiting();
+                if(!result.success){
+                    global.showTipModel(result.msg);
+                    return;
+                }
+                console.log(result);
+                global.total=result.total;
+                var total=result.total;
+                var totalPage=(total%pageSize)?(parseInt(total/pageSize)+1):(parseInt(total/pageSize))
+                var $footer=$mainPage.find(".footer-searchList");
+                $footer.find(".total").html(total);
+                $footer.find(".pageSize").html(pageSize);
+                $footer.find(".pageIndex").val(pageIndex+1);
+                $footer.find(".totalPage").html(totalPage);
+                result=result.data;
+                $mainPage.find("table").empty();
+                var str='<tr style="background: #F2F2F2">'
+                        +'<td>序号</td><td>发文标题</td><td>发文文号</td><td>文件</td>'
+                        +'</tr>'
+                for(var i=0;i<result.length;i++){
+                    var fileStr="";
+                    for(var j=0;j<result[i].listFile.length;j++){
+                        fileStr+= '<div>'
+                                +'<span>'+result[i].listFile[j].fileName+'</span>'
+                                +'</div>';
+                    }
+                    str+='<tr data-policyCode="'+result[i].policyCode+'" data-policyTitle="'+result[i].policyTitle+'">'
+                            +'<td>'+(i+1)+'</td>'
+                            +'<td>'+global.getValueForDisplay(result[i].policyTitle)+'</td>'
+                            +'<td>'+global.getValueForDisplay(result[i].issueFileNo)+'</td>'
+                            +'<td>'+fileStr+'</td>'
+                }
+                $mainPage.find("table").append(str);
+            }
+        })
+    }
+
+    $mainPage.on("click","table tr",function(){
+        $(this).siblings("tr").removeClass("checked_tr");
+        $(this).addClass("checked_tr");
+    });
+
+    $mainPage.on("dblclick","table tr",function(){
+        var policyCode=$(this).attr("data-policyCode");
+        var policyTitle=$(this).attr("data-policyTitle");
+
+    });
+    $mainPage.on("click",".footer .confirm-btn",function(){
+
+
+    });
+
+    var range = editor.selection.getRange(),
+            link = range.collapsed ? editor.queryCommandValue( "link" ) : editor.selection.getStart(),
+            text = $G('text'),
+            rangeLink = domUtils.findParentByTagName(range.getCommonAncestor(),'a',true),
+            orgText;
+    link = domUtils.findParentByTagName( link, "a", true );
+    if(link){
+        if(rangeLink === link && !link.getElementsByTagName('img').length){
+//            text.removeAttribute('disabled');
+//            var classList=$(link).attr("class").split(" ");
+//            var key = classList[0] == "queryPolicy"?classList[1]:classList[0];
+//            $text.attr("key",key);
+//            $text.val(link[browser.ie ? 'innerText':'textContent'])
+//            console.log(1)
+        }else{
+//            text.setAttribute('disabled','true');
+//            text.value = lang.validLink;
+//            console.log(2)
+        }
+
+    }else{
+        if(range.collapsed){
+//            console.log(3)
+//            text.removeAttribute('disabled');
+//            $text.val(policyDetailList[0].value);
+//            $text.attr("key",policyDetailList[0].key);
+        }else{
+//            console.log(4)
+//            text.setAttribute('disabled','true');
+//            text.value = lang.validLink;
+        }
+
+    }
+
+    function handleDialogOk(){
+        var $checkedTr=$mainPage.find("table .checked_tr");
+        if(!$checkedTr.length){
+            global.showTipModel("请先选择一条发文");
+            return false;
+        }
+        var key=$checkedTr.attr("data-policyCode");
+        var value=$checkedTr.attr("data-policyTitle");
+        var obj = {
+            'class' : key+' queryPolicy',
+            'href' : ctx+"/policyContent.html?policyCode="+key,
+            'target' : "_blank",
+        };
+
+        if(link){
+            link[browser.ie ? 'innerText' : 'textContent'] =  obj.textValue = value;
+            range.selectNode(link).select()
+            console.log(5)
+        }
+        if(range.collapsed){
+            obj.textValue = value;
+            console.log(6)
+        }
+        editor.execCommand('link',utils.clearEmptyAttrs(obj) );
+        dialog.close();
+    }
+    dialog.onok = handleDialogOk;
+
+
+</script>
+</body>
+</html>

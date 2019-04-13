@@ -1,0 +1,70 @@
+{
+  "data": [{
+    "id": "1111111",
+    "swflbm": "1111111",
+    "isClicked":false,
+    "label": "税费法规",
+    "swflmc": "税费法规",
+    "labelIcon": "/static/img/folder.png",
+    "isCategory":true,
+    "children": [
+      {
+        "id": "11",
+        "swflbm": "11",
+        "isClicked":false,
+        "isCategory":false,
+        "label": "房产税",
+        "zcbt": "房产税",
+        "labelIcon": "/static/img/file.png"
+      },
+      {
+        "id": "12",
+        "swflbm": "12",
+        "isClicked":false,
+        "isCategory":false,
+        "label": "个人所得税",
+        "zcbt": "个人所得税",
+        "labelIcon": "/static/img/file.png"
+      },
+      {
+        "id": "13",
+        "swflbm": "13",
+        "isClicked":false,
+        "isCategory":true,
+        "label": "土地税",
+        "swflmc": "土地税",
+        "labelIcon": "/static/img/folder.png",
+        "children": [
+          {
+            "id": "131",
+            "swflbm": "131",
+            "isClicked":false,
+            "isCategory":false,
+            "labelIcon": "/static/img/file.png",
+            "label": "田税",
+            "zcbt": "田税"
+          }
+        ]
+      }
+    ]
+  },
+    {
+      "id": "2",
+      "swflbm": "2",
+      "isClicked":false,
+      "label": "关税",
+      "swflmc": "关税",
+      "isCategory":true,
+      "labelIcon": "/static/img/folder.png"
+    },
+    {
+      "id": "3",
+      "swflbm": "3",
+      "label": "地税",
+      "swflmc": "地税",
+      "isCategory":true,
+      "isClicked":false,
+      "labelIcon": "/static/img/folder.png"
+    }
+  ]
+}

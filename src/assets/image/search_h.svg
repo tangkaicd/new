@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="17.594" height="17.594" viewBox="0 0 17.594 17.594">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #00acee;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="搜索icon" class="cls-1" d="M747.293,111.879a1,1,0,1,1-1.414,1.414L741.587,109a0.948,0.948,0,0,1-.26-0.537,7.076,7.076,0,1,1,1.137-1.137,0.948,0.948,0,0,1,.537.26ZM737,97a6,6,0,1,0,6,6A6,6,0,0,0,737,97Z" transform="translate(-730 -96)"/>
+</svg>
